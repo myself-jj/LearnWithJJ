@@ -2,193 +2,607 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learn With JJ | Study Materials</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Learn With JJ  - Study Materials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #3b82f6;
+            --light-bg: #f4f6f8;
+            --white: #ffffff;
+            --gray-light: #e5e7eb;
+            --gray: #6b7280;
+            --gray-dark: #374151;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.07);
+            --radius: 8px;
+        }
+
         body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            color: #333;
-        }
-
-        header {
-            background: #1e3a8a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        header p {
-            margin-top: 5px;
-            font-size: 14px;
-            opacity: 0.9;
+            background-color: var(--light-bg);
+            color: var(--gray-dark);
+            line-height: 1.6;
+            padding-bottom: 60px; /* Space for footer */
         }
 
         .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .logo-text h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 2.5rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.8rem;
+        }
+
+        .intro p {
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Subjects Accordion */
+        .subjects-container {
+            margin-bottom: 3rem;
         }
 
         .subject {
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
             overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .subject:hover {
+            box-shadow: var(--shadow-hover);
         }
 
         .subject-header {
-            padding: 15px 20px;
-            cursor: pointer;
-            background: #2563eb;
-            color: white;
+            padding: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            background-color: var(--white);
+            border-bottom: 1px solid transparent;
         }
 
-        .subject-header h2 {
-            margin: 0;
-            font-size: 18px;
+        .subject-header.active {
+            background-color: rgba(37, 99, 235, 0.05);
+            border-bottom: 1px solid var(--gray-light);
         }
 
-        .subject-header span {
-            font-size: 20px;
+        .subject-title {
+            display: flex;
+            align-items: center;
         }
 
-        .topics {
-            display: none;
-            padding: 15px 20px;
+        .subject-icon {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            color: var(--primary-color);
         }
 
-        .topics a {
-            display: block;
+        .subject-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .subject-count {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 12px;
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .topic-list {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .topic-list.expanded {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .topic-item {
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.03);
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .topic-item:hover {
+            background-color: rgba(37, 99, 235, 0.08);
+            transform: translateX(5px);
+        }
+
+        .topic-link {
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            color: #1e40af;
-            margin-bottom: 10px;
+            color: var(--gray-dark);
+            width: 100%;
+        }
+
+        .pdf-icon {
+            font-size: 1.2rem;
+            color: #e53e3e;
+            margin-right: 12px;
+        }
+
+        .topic-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        .pdf-badge {
+            background-color: #fef2f2;
+            color: #e53e3e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
-        .topics a:hover {
-            text-decoration: underline;
-            color: #1d4ed8;
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            color: var(--white);
+            padding: 2.5rem 0;
+            margin-top: 3rem;
         }
 
-        footer {
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            padding: 15px;
-            font-size: 13px;
-            color: #666;
         }
-        .social-links img {
-    width: 22px;
-    height: 22px;
-    opacity: 0.85;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
+
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo p {
+            color: var(--gray-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            color: var(--gray-light);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* Instructions for Editing */
+        .instructions {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: var(--radius);
+            color: #856404;
+        }
+
+        .instructions h4 {
+            margin-bottom: 0.8rem;
+            color: #856404;
+            display: flex;
+            align-items: center;
+        }
+
+        .instructions h4 i {
+            margin-right: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subject-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .subject-count {
+                font-size: 0.8rem;
+            }
+            
+            .topic-name {
+                font-size: 1rem;
+            }
+            
+            .footer-content {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 10px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.9rem;
+            }
+            
+            .subject-header {
+                padding: 1.2rem;
+            }
+            
+            .subject-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .topic-item {
+                padding: 0.8rem;
+            }
+        }
     </style>
 </head>
-
 <body>
-
-<header>
-    <h1>Learn with JJ</h1>
-    <p>Study Materials | PDF Notes</p>
-</header>
-
-<div class="container">
-
-    <!-- English Subject -->
-    <div class="subject">
-        <div class="subject-header" onclick="toggleTopics(this)">
-            <h2>English</h2>
-            <span>+</span>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap logo-icon"></i>
+                    <div class="logo-text">
+                        <h1>Learn With JJ </h1>
+                        <p>Study Materials | PDF Notes</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="topics">
-            <a href="https://drive.google.com/file/d/1X-iTUTAyL1-MsIXns3IftXnHJ5QZ4AiV/view?usp=drive_link" target="_blank">
-                ✔ Changing Sentence  (PDF)
-            </a>
-            <a href="https://drive.google.com/file/d/1bn4WKoC95fJjCJrFte-YSFAcQ164wT3S/view?usp=drivesdk" target="_blank">
-                ✔ Tense Full Notes (PDF)
-            </a>
-            <a href="https://drive.google.com/file/d/1FiYp3F3oW1AzVi0wcXTpUYFZaLguz5VS/view?usp=drivesdk"" target="_blank">
-                ✔ Tag Question (PDF)
-            </a>
-        </div>
-    </div>
+    </header>
 
-    <!-- Mathematics Subject -->
-    <div class="subject">
-        <div class="subject-header" onclick="toggleTopics(this)">
-            <h2>Accounting</h2>
-            <span>+</span>
-        </div>
-        <div class="topics">
-            <a href="https://drive.google.com/your-link-here" target="_blank">
-                ✔ (PDF)
-            </a>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="intro">
+            <h2>Welcome to Our Study Materials Portal</h2>
+            <p>Access all your study materials in one place. Simply click on a subject to expand it, then click on any topic to download or view the PDF notes. All materials are accessible instantly with no login required.</p>
+        </section>
+
+        <!-- Subjects Accordion -->
+        <section class="subjects-container">
+            <!-- English Subject -->
+            <div class="subject">
+                <div class="subject-header" onclick="toggleSubject('english')">
+                    <div class="subject-title">
+                        <i class="fas fa-language subject-icon"></i>
+                        <h3>English</h3>
+                        
+                    </div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="topic-list" id="english-topics">
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/1bn4WKoC95fJjCJrFte-YSFAcQ164wT3S/view?usp=drive_link" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Tense Full Notes</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/1X-iTUTAyL1-MsIXns3IftXnHJ5QZ4AiV/view?usp=drive_link" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Changing Sentence</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/1FiYp3F3oW1AzVi0wcXTpUYFZaLguz5VS/view?usp=drive_link" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Tag Question Notes</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounting Subject -->
+            <div class="subject">
+                <div class="subject-header" onclick="toggleSubject('mathematics')">
+                    <div class="subject-title">
+                        <i class="fas fa-calculator subject-icon"></i>
+                        <h3>Accounting</h3>
+                        
+                    </div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="topic-list" id="mathematics-topics">
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/3ghi789exampleMATH1/view?usp=sharing" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Nill</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/4jkl012exampleMATH2/view?usp=sharing" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Nill</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/5mno345exampleMATH3/view?usp=sharing" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Nill</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finance & Banking Subject -->
+            <div class="subject">
+                <div class="subject-header" onclick="toggleSubject('finance')">
+                    <div class="subject-title">
+                        <i class="fas fa-chart-line subject-icon"></i>
+                        <h3>Finance & Banking</h3>
                        
+                    </div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="topic-list" id="finance-topics">
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/1GevhMNioYzEzoG1F-HjLFzb9_qdIKs8x/view?usp=drive_link" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Time Value of Money (Board Question) </span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/7stu901exampleFB2/view?usp=sharing" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Nill</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                    <div class="topic-item">
+                        <a href="https://drive.google.com/file/d/8vwx234exampleFB3/view?usp=sharing" class="topic-link" target="_blank">
+                            <i class="fas fa-file-pdf pdf-icon"></i>
+                            <span class="topic-name">Nill</span>
+                            <span class="pdf-badge">PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more subjects here following the same pattern -->
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Learn With JJ </h3>
+                 
+                </div>
+                
+                <div class="contact-info">
+                    <p>Email:jihadjunaed1234@gmail.com</p>
+                    <p>Phone: +880 1690294579</p>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jihad.junaed.2700" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://wa.me/8801690294579" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2026 Learn With JJ | All Rights Reserved</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Finance & Banking -->
-    <div class="subject">
-        <div class="subject-header" onclick="toggleTopics(this)">
-            <h2>Finance & Banking</h2>
-            <span>+</span>
-        </div>
-        <div class="topics">
-            <a href="https://drive.google.com/file/d/1GevhMNioYzEzoG1F-HjLFzb9_qdIKs8x/view?usp=drivesdk" target="_blank">
-                ✔ অর্থের সময় মূল্য-বোর্ড প্রশ্ন (PDF)
-            </a>
-            <a href="https://drive.google.com/your-link-here" target="_blank">
-                ✔  (PDF)
-            </a>
-        </div>
-    </div>
+    <!-- JavaScript for Accordion Functionality -->
+    <script>
+        // Initialize first subject as open
+        document.addEventListener('DOMContentLoaded', function() {
+            // Open the first subject by default
+            toggleSubject('english', true);
+            
+            // Close other subjects when one is opened
+            const subjectHeaders = document.querySelectorAll('.subject-header');
+            subjectHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const subjectId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    
+                    // Close all other subjects
+                    subjectHeaders.forEach(otherHeader => {
+                        if (otherHeader !== this) {
+                            const otherSubjectId = otherHeader.getAttribute('onclick').match(/'([^']+)'/)[1];
+                            const otherTopics = document.getElementById(otherSubjectId + '-topics');
+                            otherHeader.classList.remove('active');
+                            otherTopics.classList.remove('expanded');
+                        }
+                    });
+                });
+            });
+        });
 
-</div>
-
-<footer>
-    <p>Contact Me</p>
-
-    <div class="social-links">
-        <!-- Facebook -->
-        <a href="https://www.facebook.com/share/1CDQFQJoEE/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
-        </a>
-
-        <!-- WhatsApp -->
-        <a href="https://wa.me/8801690294579" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </a>
-    </div>
-
-    <p style="margin-top:10px;">© 2026 Jihad Academy</p>
-</footer>
-
-<script>
-    function toggleTopics(element) {
-        const topics = element.nextElementSibling;
-        const icon = element.querySelector("span");
-
-        if (topics.style.display === "block") {
-            topics.style.display = "none";
-            icon.textContent = "+";
-        } else {
-            topics.style.display = "block";
-            icon.textContent = "−";
+        // Toggle subject accordion
+        function toggleSubject(subjectId, isInitialLoad = false) {
+            const topics = document.getElementById(subjectId + '-topics');
+            const header = document.querySelector(`[onclick="toggleSubject('${subjectId}')"]`);
+            
+            // If not initial load, toggle the active state
+            if (!isInitialLoad) {
+                header.classList.toggle('active');
+                topics.classList.toggle('expanded');
+            } else {
+                // For initial load, just set as active
+                header.classList.add('active');
+                topics.classList.add('expanded');
+            }
         }
-    }
-</script>
 
+        // Simple animation for topic items on click
+        document.querySelectorAll('.topic-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Create a small visual feedback
+                const topicItem = this.closest('.topic-item');
+                topicItem.style.backgroundColor = 'rgba(37, 99, 235, 0.15)';
+                
+                // Reset after a short delay
+                setTimeout(() => {
+                    topicItem.style.backgroundColor = '';
+                }, 300);
+            });
+        });
+    </script>
 </body>
 </html>
