@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn With JJ | Study Materials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .subject {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .subject-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .subject-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .subject-header span {
+            font-size: 20px;
+        }
+
+        .topics {
+            display: none;
+            padding: 15px 20px;
+        }
+
+        .topics a {
+            display: block;
+            text-decoration: none;
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .topics a:hover {
+            text-decoration: underline;
+            color: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+        .social-links img {
+    width: 22px;
+    height: 22px;
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Learn with JJ</h1>
+    <p>Study Materials | PDF Notes</p>
+</header>
+
+<div class="container">
+
+    <!-- English Subject -->
+    <div class="subject">
+        <div class="subject-header" onclick="toggleTopics(this)">
+            <h2>English</h2>
+            <span>+</span>
+        </div>
+        <div class="topics">
+            <a href="https://drive.google.com/file/d/1X-iTUTAyL1-MsIXns3IftXnHJ5QZ4AiV/view?usp=drive_link" target="_blank">
+                ✔ Changing Sentence  (PDF)
+            </a>
+            <a href="https://drive.google.com/file/d/1bn4WKoC95fJjCJrFte-YSFAcQ164wT3S/view?usp=drivesdk" target="_blank">
+                ✔ Tense Full Notes (PDF)
+            </a>
+            <a href="https://drive.google.com/file/d/1FiYp3F3oW1AzVi0wcXTpUYFZaLguz5VS/view?usp=drivesdk"" target="_blank">
+                ✔ Tag Question (PDF)
+            </a>
+        </div>
+    </div>
+
+    <!-- Mathematics Subject -->
+    <div class="subject">
+        <div class="subject-header" onclick="toggleTopics(this)">
+            <h2>Accounting</h2>
+            <span>+</span>
+        </div>
+        <div class="topics">
+            <a href="https://drive.google.com/your-link-here" target="_blank">
+                ✔ (PDF)
+            </a>
+                       
+        </div>
+    </div>
+
+    <!-- Finance & Banking -->
+    <div class="subject">
+        <div class="subject-header" onclick="toggleTopics(this)">
+            <h2>Finance & Banking</h2>
+            <span>+</span>
+        </div>
+        <div class="topics">
+            <a href="https://drive.google.com/file/d/1GevhMNioYzEzoG1F-HjLFzb9_qdIKs8x/view?usp=drivesdk" target="_blank">
+                ✔ অর্থের সময় মূল্য-বোর্ড প্রশ্ন (PDF)
+            </a>
+            <a href="https://drive.google.com/your-link-here" target="_blank">
+                ✔  (PDF)
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>Contact Me</p>
+
+    <div class="social-links">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/share/1CDQFQJoEE/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/8801690294579" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <p style="margin-top:10px;">© 2026 Jihad Academy</p>
+</footer>
+
+<script>
+    function toggleTopics(element) {
+        const topics = element.nextElementSibling;
+        const icon = element.querySelector("span");
+
+        if (topics.style.display === "block") {
+            topics.style.display = "none";
+            icon.textContent = "+";
+        } else {
+            topics.style.display = "block";
+            icon.textContent = "−";
+        }
+    }
+</script>
+
+</body>
+</html>
